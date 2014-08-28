@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.widget.EditText;
 import android.widget.Toast;
 
 /**
@@ -14,12 +15,16 @@ import android.widget.Toast;
 public class SearchDialogFragment extends DialogFragment {
    @Override
    public AlertDialog onCreateDialog(Bundle savedInstanceState) {
+       final EditText searchField = new EditText(getActivity());
+
        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
        builder.setMessage(R.string.dialog_search)
+               .setView(searchField)
                .setPositiveButton(R.string.button_search, new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
-                       Toast.makeText(getActivity(), "Searching", Toast.LENGTH_LONG).show(); // TODO
+                       String text = searchField.getText().toString();
+                       Toast.makeText(getActivity(), "Searching for " + text, Toast.LENGTH_LONG).show(); // TODO
                    }
                })
                .setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
